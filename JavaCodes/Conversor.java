@@ -1,15 +1,15 @@
-import java.util.Scanner;
+//import java.util.Scanner;
 
 public class Conversor {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        //Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Ingrese la temperatura en Celsius: ");
-        double celsius = scanner.nextDouble();
+        System.out.println("Ingrese la temperatura en Celsius: " + args[0]);
+        double celsius = Double.parseDouble(args[0]);//scanner.nextDouble();
 
         double fahrenheit = (celsius * 9/5) + 32;
         System.out.println("Equivalente en Fahrenheit: " + fahrenheit);
 
-        scanner.close();
+        //scanner.close();
     }
 }
