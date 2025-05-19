@@ -1,15 +1,26 @@
-import java.util.Scanner;
-
 public class Conversor {
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        if (args.length != 1) {
+            System.out.println("Uso: java Conversor <temperatura_en_Celsius>");
+            return;
+        }
 
-        System.out.print("Ingrese la temperatura en Celsius: ");
-        double celsius = scanner.nextDouble();
+        try {
+            double celsius = Double.parseDouble(args[0]);
+            double fahrenheit = convertirAFahrenheit(celsius);
+            mostrarResultado(celsius, fahrenheit);
+        } catch (NumberFormatException e) {
+            System.out.println("Error: debe ingresar un número válido como argumento.");
+        }
+    }
 
-        double fahrenheit = (celsius * 9/5) + 32;
+    private static double convertirAFahrenheit(double celsius) {
+        return (celsius * 9 / 5) + 32;
+    }
+
+    private static void mostrarResultado(double celsius, double fahrenheit) {
+        System.out.println("Temperatura en Celsius: " + celsius);
         System.out.println("Equivalente en Fahrenheit: " + fahrenheit);
-
-        scanner.close();
     }
 }
