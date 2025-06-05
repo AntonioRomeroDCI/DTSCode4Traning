@@ -1,34 +1,18 @@
+import java.util.Scanner;
+
 public class Suma {
-
     public static void main(String[] args) {
-        if (args.length != 2) {
-            System.out.println("Uso: java Suma <numero1> <numero2>");
-            return;
-        }
+        Scanner scanner = new Scanner(System.in);
 
-        try {
-            int num1 = Integer.parseInt(args[0]);
-            int num2 = Integer.parseInt(args[1]);
+        System.out.print("Ingrese el primer número: ");
+        int num1 = scanner.nextInt();
 
-            mostrarNumeros(num1, num2);
-            int resultado = sumar(num1, num2);
-            mostrarResultado(resultado);
+        System.out.print("Ingrese el segundo número: ");
+        int num2 = scanner.nextInt();
 
-        } catch (NumberFormatException e) {
-            System.out.println("Error: Ambos argumentos deben ser números enteros.");
-        }
-    }
-
-    private static void mostrarNumeros(int num1, int num2) {
-        System.out.println("Primer número: " + num1);
-        System.out.println("Segundo número: " + num2);
-    }
-
-    private static int sumar(int a, int b) {
-        return a + b;
-    }
-
-    private static void mostrarResultado(int suma) {
+        int suma = num1 + num2;
         System.out.println("La suma es: " + suma);
+
+        scanner.close();
     }
 }
