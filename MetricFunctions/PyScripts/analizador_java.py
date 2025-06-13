@@ -1,3 +1,4 @@
+import math
 import re
 import sys
 from collections import Counter
@@ -68,6 +69,51 @@ def obtener_operandos(codigo):
 
     return operandos
 
+def getVocabulary(n1,n2):
+    """
+    Vocabulary(n)
+    n1 : Número de operadores distintos
+    n2 : Número de operandos distintos
+    returns n
+    """
+    return n1+n2
+
+def getLength(N1,N2):
+    """
+    Length(N)
+    N1 : Número total de operadores
+    N2 : Número total de operandos
+    returns N 
+    """
+    return N1+N2
+
+def getVolume(N,n):
+    return N*(math.log(n, 2))
+
+def getLevel(n1,n2,N2):
+    return (2/n1)*(n2/N2)
+
+def getDifficulty(n1,n2,N2):
+    return (n1/2)*(N2/n2)
+
+def getEffort(V,L):
+    """
+    V : Volume
+    L : Level
+    returns E 
+    """
+    return V/L
+
+def getFaults(V,S):
+    """
+    V : Volume
+    S : Mean number of mental discriminations (decisions) 
+    between errors (S* is 3000 according to Halstead)
+    returns B
+    """
+    return V/S
+
+
 # -------- Programa principal --------
 
 def main():
@@ -94,18 +140,46 @@ def main():
     lista_operandos = obtener_operandos(codigo)
     conteo_od = Counter(lista_operandos)
 
-    # Mostrar resultados
-    print("===== Análisis de Operadores (Java) =====")
-    print(f"Operadores distintos: {len(conteo_op)}")
-    print(f"Total de operadores: {sum(conteo_op.values())}")
-    for op, c in sorted(conteo_op.items()):
-        print(f"  '{op}': {c}")
+    #Asignacion de variables a usar en métricas
+    n1 = len(conteo_op)     #Operadores distintos
+    n2 = len(conteo_od)     #Operandos distintos
 
-    print("\n===== Análisis de Operandos (Java) =====")
-    print(f"Operandos distintos: {len(conteo_od)}")
-    print(f"Total de operandos: {sum(conteo_od.values())}")
-    for od, c in sorted(conteo_od.items()):
-        print(f"  '{od}': {c}")
+    N1 = sum(conteo_op.values())    #Numero total de ocurrencias de operadores
+    N2 = sum(conteo_od.values())    #Numero total de ocurrencias de operandos
+
+    n = getVocabulary(n1,n2)
+    N = getLength(N1,N2)
+    V = getVolume(N,n)
+    L = getLevel(n1,n2,N2)
+    D = getDifficulty(n1,n2,N2)
+    E = getEffort(V,L)
+    B = getFaults(V,3000)
+
+    print(f"n1 = {n1}")
+    print(f"n2 = {n2}")
+    print(f"N1 = {N1}")
+    print(f"N2 = {N2}")
+
+    print(f"Vocabulary (n) = {n}")
+    print(f"Length (N) = {N}")
+    print(f"Volume (V) = {V}")
+    print(f"Level (L) = {L}")
+    print(f"Difficulty (D) = {D}")
+    print(f"Effort (E) = {E}")
+    print(f"Faults (B) = {B}")
+
+    # Mostrar resultados
+    # print("===== Análisis de Operadores (Java) =====")
+    # print(f"Operadores distintos: {len(conteo_op)}")
+    # print(f"Total de operadores: {sum(conteo_op.values())}")
+    # for op, c in sorted(conteo_op.items()):
+    #     print(f"  '{op}': {c}")
+
+    # print("\n===== Análisis de Operandos (Java) =====")
+    # print(f"Operandos distintos: {len(conteo_od)}")
+    # print(f"Total de operandos: {sum(conteo_od.values())}")
+    # for od, c in sorted(conteo_od.items()):
+    #     print(f"  '{od}': {c}")
 
 if __name__ == "__main__":
     main()
