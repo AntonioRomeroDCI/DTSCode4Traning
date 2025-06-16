@@ -1,7 +1,10 @@
 import math
 import re
 import sys
+import os
 from collections import Counter
+
+DIRECTORIO_JAVA = "../../../Code/Java"
 
 # -------- Operadores comunes de Java --------
 operadores_java = [
@@ -114,72 +117,100 @@ def getFaults(V,S):
     return V/S
 
 
+def getHalsteadMetrics(directory_file):
+
+    with open(directory_file, 'r') as file:
+        #Lee el archivo 
+        code = file.read()
+        #Limpia el archivo eliminando los comentarios y elemementos especiales
+        code = limpiar_codigo(code)
+
+        #Analisis de operadores
+        lista_operadores = obtener_operadores(code)
+        conteo_op = Counter(lista_operadores)
+
+        #Analisis de operandos
+        lista_operandos = obtener_operandos(code)
+        conteo_od = Counter(lista_operandos)
+
+        #Asignacion de variables a usar en métricas
+        n1 = len(conteo_op)     #Operadores distintos
+        n2 = len(conteo_od)     #Operandos distintos
+
+        N1 = sum(conteo_op.values())    #Numero total de ocurrencias de operadores
+        N2 = sum(conteo_od.values())    #Numero total de ocurrencias de operandos
+
+        n = getVocabulary(n1,n2)
+        N = getLength(N1,N2)
+        V = getVolume(N,n)
+        L = getLevel(n1,n2,N2)
+        D = getDifficulty(n1,n2,N2)
+        E = getEffort(V,L)
+        B = getFaults(V,3000)
+
+        print(f"n1 = {n1}")
+        print(f"n2 = {n2}")
+        print(f"N1 = {N1}")
+        print(f"N2 = {N2}")
+
+        print(f"Vocabulary (n) = {n}")
+        print(f"Length (N) = {N}")
+        print(f"Volume (V) = {V}")
+        print(f"Level (L) = {L}")
+        print(f"Difficulty (D) = {D}")
+        print(f"Effort (E) = {E}")
+        print(f"Faults (B) = {B}")
+
+def getLOC(directory_file):
+    loc = 0
+    en_comentario_multilinea = False
+
+    with open(directory_file, 'r') as file:
+        for linea in file:
+            linea_strip = linea.strip()
+
+            # Ignorar líneas vacías
+            if not linea_strip:
+                continue
+
+            # Comprobación de comentarios multilínea
+            if en_comentario_multilinea:
+                if '*/' in linea_strip:
+                    en_comentario_multilinea = False
+                continue
+
+            if linea_strip.startswith("/*") or linea_strip.startswith("/**"):
+                en_comentario_multilinea = True
+                continue
+
+            # Ignorar comentarios de una sola línea
+            if linea_strip.startswith("//"):
+                continue
+
+            # Ignorar líneas que contienen solo cierre de comentario
+            if linea_strip.endswith("*/"):
+                continue
+
+            # Si pasó todos los filtros, cuenta como LOC
+            loc += 1
+
+        print(f"LOC= {loc}")
+
+    #return loc
+
 # -------- Programa principal --------
-
 def main():
-    if len(sys.argv) != 2:
-        print("Uso: python analizador_java.py <archivo.java>")
-        sys.exit(1)
-
-    archivo = sys.argv[1]
-
     try:
-        with open(archivo, 'r') as f:
-            codigo = f.read()
+        for file in os.listdir(DIRECTORIO_JAVA):
+            if file.endswith('.java'):
+                directory_file = os.path.join(DIRECTORIO_JAVA, file)
+                print("\n")
+                print(directory_file)
+                getLOC(directory_file)
+                getHalsteadMetrics(directory_file)
     except FileNotFoundError:
-        print(f"Error: No se encontró el archivo '{archivo}'")
+        print(f"Error: No se encontró el archivo '{directory_file}'")
         sys.exit(1)
-
-    codigo = limpiar_codigo(codigo)
-
-    # Análisis de operadores
-    lista_operadores = obtener_operadores(codigo)
-    conteo_op = Counter(lista_operadores)
-
-    # Análisis de operandos
-    lista_operandos = obtener_operandos(codigo)
-    conteo_od = Counter(lista_operandos)
-
-    #Asignacion de variables a usar en métricas
-    n1 = len(conteo_op)     #Operadores distintos
-    n2 = len(conteo_od)     #Operandos distintos
-
-    N1 = sum(conteo_op.values())    #Numero total de ocurrencias de operadores
-    N2 = sum(conteo_od.values())    #Numero total de ocurrencias de operandos
-
-    n = getVocabulary(n1,n2)
-    N = getLength(N1,N2)
-    V = getVolume(N,n)
-    L = getLevel(n1,n2,N2)
-    D = getDifficulty(n1,n2,N2)
-    E = getEffort(V,L)
-    B = getFaults(V,3000)
-
-    print(f"n1 = {n1}")
-    print(f"n2 = {n2}")
-    print(f"N1 = {N1}")
-    print(f"N2 = {N2}")
-
-    print(f"Vocabulary (n) = {n}")
-    print(f"Length (N) = {N}")
-    print(f"Volume (V) = {V}")
-    print(f"Level (L) = {L}")
-    print(f"Difficulty (D) = {D}")
-    print(f"Effort (E) = {E}")
-    print(f"Faults (B) = {B}")
-
-    # Mostrar resultados
-    # print("===== Análisis de Operadores (Java) =====")
-    # print(f"Operadores distintos: {len(conteo_op)}")
-    # print(f"Total de operadores: {sum(conteo_op.values())}")
-    # for op, c in sorted(conteo_op.items()):
-    #     print(f"  '{op}': {c}")
-
-    # print("\n===== Análisis de Operandos (Java) =====")
-    # print(f"Operandos distintos: {len(conteo_od)}")
-    # print(f"Total de operandos: {sum(conteo_od.values())}")
-    # for od, c in sorted(conteo_od.items()):
-    #     print(f"  '{od}': {c}")
 
 if __name__ == "__main__":
     main()
