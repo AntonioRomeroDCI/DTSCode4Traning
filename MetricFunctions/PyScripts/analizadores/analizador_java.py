@@ -3,8 +3,10 @@ import re
 import sys
 import os
 from collections import Counter
+import pandas as pd
 
 DIRECTORIO_JAVA = "../../../Code/Java"
+DIRECTORIO_DATA = "../../../Data/"
 
 # -------- Operadores comunes de Java --------
 operadores_java = [
@@ -117,7 +119,7 @@ def getFaults(V,S):
     return V/S
 
 
-def getHalsteadMetrics(directory_file):
+def getHalsteadMetrics(directory_file, code_metrics):
 
     with open(directory_file, 'r') as file:
         #Lee el archivo 
@@ -148,18 +150,32 @@ def getHalsteadMetrics(directory_file):
         E = getEffort(V,L)
         B = getFaults(V,3000)
 
-        print(f"n1 = {n1}")
-        print(f"n2 = {n2}")
-        print(f"N1 = {N1}")
-        print(f"N2 = {N2}")
+        # print(f"n1 = {n1}")
+        # print(f"n2 = {n2}")
+        # print(f"N1 = {N1}")
+        # print(f"N2 = {N2}")
 
-        print(f"Vocabulary (n) = {n}")
-        print(f"Length (N) = {N}")
-        print(f"Volume (V) = {V}")
-        print(f"Level (L) = {L}")
-        print(f"Difficulty (D) = {D}")
-        print(f"Effort (E) = {E}")
-        print(f"Faults (B) = {B}")
+        # print(f"Vocabulary (n) = {n}")
+        # print(f"Length (N) = {N}")
+        # print(f"Volume (V) = {V}")
+        # print(f"Level (L) = {L}")
+        # print(f"Difficulty (D) = {D}")
+        # print(f"Effort (E) = {E}")
+        # print(f"Faults (B) = {B}")
+
+        code_metrics.append(n1)
+        code_metrics.append(n2)
+        code_metrics.append(N1)
+        code_metrics.append(N2)
+        code_metrics.append(n)
+        code_metrics.append(N)
+        code_metrics.append(V)
+        code_metrics.append(L)
+        code_metrics.append(D)
+        code_metrics.append(E)
+        code_metrics.append(B)
+
+        return code_metrics
 
 def getLOC(directory_file):
     loc = 0
@@ -194,20 +210,32 @@ def getLOC(directory_file):
             # Si pasó todos los filtros, cuenta como LOC
             loc += 1
 
-        print(f"LOC= {loc}")
-
-    #return loc
+    return loc
 
 # -------- Programa principal --------
 def main():
+
+    # Crear un DataFrame vacío con columnas definidas
+    df = pd.DataFrame(columns=["LOC","n1", "n2", "N1", "N2", "n", "N", "V", "L", "D", "E", "B"])
+
     try:
         for file in os.listdir(DIRECTORIO_JAVA):
             if file.endswith('.java'):
                 directory_file = os.path.join(DIRECTORIO_JAVA, file)
-                print("\n")
-                print(directory_file)
-                getLOC(directory_file)
-                getHalsteadMetrics(directory_file)
+                code_metrics = []
+                
+                #Adding LOC
+                loc = getLOC(directory_file)
+                code_metrics.append(loc)
+
+                #Adding Halstead metrics
+                code_metrics = getHalsteadMetrics(directory_file,code_metrics)
+
+                #Agrega el contenido de las metricas en un Dataframe
+                df.loc[len(df)] = code_metrics
+
+                # Guardar en CSV
+                df.to_csv(DIRECTORIO_DATA+'code_metrics.csv', index=False, encoding='utf-8')
     except FileNotFoundError:
         print(f"Error: No se encontró el archivo '{directory_file}'")
         sys.exit(1)
