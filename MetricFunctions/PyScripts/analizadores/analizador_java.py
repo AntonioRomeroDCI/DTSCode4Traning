@@ -5,7 +5,7 @@ import os
 from collections import Counter
 import pandas as pd
 
-DIRECTORIO_JAVA = "../../../Code/Java"
+DIRECTORIO_JAVA = "../../../Code/Java/Refactored"
 DIRECTORIO_DATA = "../../../Data/"
 
 # -------- Operadores comunes de Java --------
@@ -235,7 +235,7 @@ def main():
                 df.loc[len(df)] = code_metrics
 
                 # Guardar en CSV
-                df.to_csv(DIRECTORIO_DATA+'code_metrics.csv', index=False, encoding='utf-8')
+                df.to_csv(DIRECTORIO_DATA+'code_metrics_ref.csv', index=False, encoding='utf-8')
     except FileNotFoundError:
         print(f"Error: No se encontró el archivo '{directory_file}'")
         sys.exit(1)
