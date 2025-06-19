@@ -4,6 +4,12 @@ import os
 import csv
 from collections import Counter, defaultdict
 
+# DIR_CODE = "../../../Code/Java"
+# DATA_CODE = "../../../Data/original"
+
+DIR_CODE = "../../../Code/Java/Refactored"
+DATA_CODE = "../../../Data/refactored"
+
 JAVA_OPERATORS = [
     "+", "-", "*", "/", "=", "==", "!=", ">", "<", ">=", "<=", "&&", "||", "!", "%",
     "++", "--", "+=", "-=", "*=", "/=", "%=", "<<", ">>", "&", "|", "^", "~", ">>>",
@@ -55,11 +61,13 @@ def analyze_folder(folder_path, output_detail_csv, output_summary_csv):
     file_totals = defaultdict(lambda: Counter())
 
     for filename in os.listdir(folder_path):
+        print(filename)
         if filename.endswith('.java'):
             file_path = os.path.join(folder_path, filename)
             with open(file_path, 'r', encoding='utf-8') as f:
                 code = f.read()
             methods = extract_methods(code)
+            print(methods)
             for name, body in methods:
                 metrics = halstead_metrics(body)
                 results.append({
@@ -97,7 +105,7 @@ def analyze_folder(folder_path, output_detail_csv, output_summary_csv):
 # === Ejecución ===
 if __name__ == "__main__":
     analyze_folder(
-        folder_path="../../../Code/Java/Refactored",
-        output_detail_csv="../../../Data/halstead_por_metodo.csv",
-        output_summary_csv="../../../Data/halstead_por_archivo.csv"
+        folder_path=DIR_CODE,
+        output_detail_csv=f"{DATA_CODE}/halstead_por_metodo.csv",
+        output_summary_csv=f"{DATA_CODE}/halstead_por_archivo.csv"
     )
