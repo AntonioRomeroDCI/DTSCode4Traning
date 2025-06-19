@@ -5,8 +5,11 @@ import os
 from collections import Counter
 import pandas as pd
 
-DIRECTORIO_JAVA = "../../../Code/Java/Refactored"
-DIRECTORIO_DATA = "../../../Data/"
+# DIR_CODE = "../../../Code/Java"
+# DATA_CODE = "../../../Data/original"
+
+DIR_CODE = "../../../Code/Java/Refactored"
+DATA_CODE = "../../../Data/refactored"
 
 # -------- Operadores comunes de Java --------
 operadores_java = [
@@ -216,14 +219,17 @@ def getLOC(directory_file):
 def main():
 
     # Crear un DataFrame vacío con columnas definidas
-    df = pd.DataFrame(columns=["LOC","n1", "n2", "N1", "N2", "n", "N", "V", "L", "D", "E", "B"])
+    df = pd.DataFrame(columns=["File","LOC","n1", "n2", "N1", "N2", "n", "N", "V", "L", "D", "E", "B"])
 
     try:
-        for file in os.listdir(DIRECTORIO_JAVA):
+        for file in os.listdir(DIR_CODE):
             if file.endswith('.java'):
-                directory_file = os.path.join(DIRECTORIO_JAVA, file)
+                directory_file = os.path.join(DIR_CODE, file)
                 code_metrics = []
                 
+                ##Adding file name in [0]
+                code_metrics.append(file)
+
                 #Adding LOC
                 loc = getLOC(directory_file)
                 code_metrics.append(loc)
@@ -235,7 +241,7 @@ def main():
                 df.loc[len(df)] = code_metrics
 
                 # Guardar en CSV
-                df.to_csv(DIRECTORIO_DATA+'code_metrics_ref.csv', index=False, encoding='utf-8')
+                df.to_csv(f"{DATA_CODE}/code_metrics.csv", index=False, encoding='utf-8')
     except FileNotFoundError:
         print(f"Error: No se encontró el archivo '{directory_file}'")
         sys.exit(1)
