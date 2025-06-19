@@ -5,11 +5,11 @@ import os
 from collections import Counter
 import pandas as pd
 
-DIR_ORIGINAL = "../../../Code/Java"
-DATA_ORIGINAL = "../../../Data/original"
+# DIR_CODE = "../../../Code/Java"
+# DATA_CODE = "../../../Data/original"
 
-DIR_REFACTORED = "../../../Code/Java/Refactored"
-DATA_REFACTORED = "../../../Data/refactored"
+DIR_CODE = "../../../Code/Java/Refactored"
+DATA_CODE = "../../../Data/refactored"
 
 # -------- Operadores comunes de Java --------
 operadores_java = [
@@ -222,9 +222,9 @@ def main():
     df = pd.DataFrame(columns=["File","LOC","n1", "n2", "N1", "N2", "n", "N", "V", "L", "D", "E", "B"])
 
     try:
-        for file in os.listdir(DIR_ORIGINAL):
+        for file in os.listdir(DIR_CODE):
             if file.endswith('.java'):
-                directory_file = os.path.join(DIR_ORIGINAL, file)
+                directory_file = os.path.join(DIR_CODE, file)
                 code_metrics = []
                 
                 ##Adding file name in [0]
@@ -241,7 +241,7 @@ def main():
                 df.loc[len(df)] = code_metrics
 
                 # Guardar en CSV
-                df.to_csv(f"{DATA_ORIGINAL}/code_metrics_02.csv", index=False, encoding='utf-8')
+                df.to_csv(f"{DATA_CODE}/code_metrics.csv", index=False, encoding='utf-8')
     except FileNotFoundError:
         print(f"Error: No se encontró el archivo '{directory_file}'")
         sys.exit(1)

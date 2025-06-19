@@ -4,11 +4,11 @@ import csv
 import math
 from collections import Counter, defaultdict
 
-DIR_CODE = "../../../Code/Java"
-DATA_CODE = "../../../Data/original"
+# DIR_CODE = "../../../Code/Java"
+# DATA_CODE = "../../../Data/original"
 
-# DIR_CODE = "../../../Code/Java/Refactored"
-# DATA_CODE = "../../../Data/refactored"
+DIR_CODE = "../../../Code/Java/Refactored"
+DATA_CODE = "../../../Data/refactored"
 
 # Operadores básicos en Java
 JAVA_OPERATORS = [
@@ -112,6 +112,6 @@ def analyze_folder(folder_path, csv_metodo, csv_archivo):
 if __name__ == "__main__":
     analyze_folder(
         folder_path=DIR_CODE,
-        csv_metodo=f"{DATA_CODE}/halstead_por_metodo_02.csv",
-        csv_archivo=f"{DATA_CODE}/halstead_por_archivo_02.csv"
+        csv_metodo=f"{DATA_CODE}/halstead_por_metodo.csv",
+        csv_archivo=f"{DATA_CODE}/halstead_por_archivo.csv"
     )
