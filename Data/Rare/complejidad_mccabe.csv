@@ -1,0 +1,6 @@
+archivo,funcion,linea_inicio,complejidad_mccabe,lineas_codigo
+../../../Code/Java/Rare/Conversor.java,Conversor::main,4,1,11
+../../../Code/Java/Rare/Suma.java,Suma::main,4,1,14
+../../../Code/Java/Rare/Tareas.java,Tareas::main,4,4,25
+../../../Code/Java/Rare/Factorial.java,Factorial::main,4,2,14
+../../../Code/Java/Rare/Adivina.java,Adivina::main,5,2,17
