@@ -4,11 +4,13 @@ import csv
 import math
 from collections import Counter, defaultdict
 
-# DIR_CODE = "../../../Code/Java"
-# DATA_CODE = "../../../Data/original"
+# DIR_CODE = "../../../Code/Java/Rare"
+# DIR_GRAPHS = "../../../Graficas/Rare"
+# DATA_CODE = "../../../Data/Rare"
 
 DIR_CODE = "../../../Code/Java/Refactored"
-DATA_CODE = "../../../Data/refactored"
+DIR_GRAPHS = "../../../Graficas/Refactored"
+DATA_CODE = "../../../Data/Refactored"
 
 # Operadores básicos en Java
 JAVA_OPERATORS = [
