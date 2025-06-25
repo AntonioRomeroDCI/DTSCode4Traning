@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Lista de clases Java sin la extensión .class
-CLASES=("Code.Java.Rare.Adivina" "Code.Java.Rare.Conversor" "Code.Java.Rare.Factorial" "Code.Java.Rare.Suma" "Code.Java.Rare.Tareas")  # ← Edita con tus clases
+CLASES=("Code.Java.Refactored.Adivina" "Code.Java.Refactored.Conversor" "Code.Java.Refactored.Factorial" "Code.Java.Refactored.Suma" "Code.Java.Refactored.Tareas")  # ← Edita con tus clases
 
 # Archivo de promedios general
 promedios_csv="Times/promedios.csv"
