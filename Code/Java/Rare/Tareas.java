@@ -1,15 +1,17 @@
+package Code.Java.Rare;
+
 import java.util.Scanner;
 
 public class Tareas {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        //Scanner scanner = new Scanner(System.in);
         String[] tareas = new String[5]; // Permite hasta 5 tareas
         int contador = 0;
 
         System.out.println("Gestor de Tareas");
         while (contador < 5) {
             System.out.print("Ingrese una tarea (o 'salir' para terminar): ");
-            String tarea = scanner.nextLine();
+            String tarea = "tarea" + contador; //scanner.nextLine();
 
             if (tarea.equalsIgnoreCase("salir")) {
                 break;
@@ -24,6 +26,6 @@ public class Tareas {
             System.out.println((i + 1) + ". " + tareas[i]);
         }
 
-        scanner.close();
+        //scanner.close();
     }
 }
