@@ -1,3 +1,5 @@
+package Code.Java.Refactored;
+
 public class Suma {
 
     public static void main(String[] args) {

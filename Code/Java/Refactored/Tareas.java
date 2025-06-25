@@ -1,3 +1,5 @@
+package Code.Java.Refactored;
+
 import java.util.Scanner;
 
 public class Tareas {

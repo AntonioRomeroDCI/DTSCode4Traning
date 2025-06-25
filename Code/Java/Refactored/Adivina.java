@@ -1,3 +1,5 @@
+package Code.Java.Refactored;
+
 import java.util.Random;
 
 public class Adivina {
