@@ -1,31 +1,31 @@
 package Code.Java.Refactored;
 
-import java.util.Scanner;
+//import java.util.Scanner;
 
 public class Tareas {
 
     private static final int LIMITE_TAREAS = 5;
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        //Scanner scanner = new Scanner(System.in);
         String[] tareas = new String[LIMITE_TAREAS];
 
         mostrarMenu();
-        int contador = leerTareas(scanner, tareas);
+        int contador = leerTareas(tareas);
         mostrarTareas(tareas, contador);
 
-        scanner.close();
+        //scanner.close();
     }
 
     private static void mostrarMenu() {
         System.out.println("Gestor de Tareas");
     }
 
-    private static int leerTareas(Scanner scanner, String[] tareas) {
+    private static int leerTareas(String[] tareas) {
         int contador = 0;
         while (contador < LIMITE_TAREAS) {
             System.out.print("Ingrese una tarea (o 'salir' para terminar): ");
-            String tarea = scanner.nextLine();
+            String tarea = "tarea" + contador;
 
             if (tarea.equalsIgnoreCase("salir")) {
                 break;

@@ -3,14 +3,14 @@ package Code.Java.Refactored;
 public class Suma {
 
     public static void main(String[] args) {
-        if (args.length != 2) {
-            System.out.println("Uso: java Suma <numero1> <numero2>");
-            return;
-        }
+        // if (args.length != 2) {
+        //     System.out.println("Uso: java Suma <numero1> <numero2>");
+        //     return;
+        // }
 
         try {
-            int num1 = Integer.parseInt(args[0]);
-            int num2 = Integer.parseInt(args[1]);
+            int num1 = Integer.parseInt("16");
+            int num2 = Integer.parseInt("17");
 
             mostrarNumeros(num1, num2);
             int resultado = sumar(num1, num2);
