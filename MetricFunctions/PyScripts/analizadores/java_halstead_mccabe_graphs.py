@@ -6,12 +6,12 @@ from collections import Counter, defaultdict
 import matplotlib.pyplot as plt
 import pandas as pd
 
-FOLDER = "Rare"
-# FOLDER = "Refactored"
+# FOLDER = "Rare"
+FOLDER = "Refactored"
 
-DIR_CODE = f"../../../Code/Java/{FOLDER}"
-DIR_GRAPHS = f"../../../Graficas/{FOLDER}"
-DATA_CODE = f"../../../Data/{FOLDER}"
+DIR_CODE = f"./Code/Java/{FOLDER}"
+DIR_GRAPHS = f"./Graficas/{FOLDER}"
+DATA_CODE = f"./Data/{FOLDER}"
 
 JAVA_OPERATORS = [
     "+", "-", "*", "/", "=", "==", "!=", ">", "<", ">=", "<=", "&&", "||", "!", "%",
