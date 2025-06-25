@@ -1,13 +1,15 @@
+package Code.Java.Refactored;
+
 public class Conversor {
 
     public static void main(String[] args) {
-        if (args.length != 1) {
-            System.out.println("Uso: java Conversor <temperatura_en_Celsius>");
-            return;
-        }
+        // if (args.length != 1) {
+        //     System.out.println("Uso: java Conversor <temperatura_en_Celsius>");
+        //     return;
+        // }
 
         try {
-            double celsius = Double.parseDouble(args[0]);
+            double celsius = Double.parseDouble("100");
             double fahrenheit = convertirAFahrenheit(celsius);
             mostrarResultado(celsius, fahrenheit);
         } catch (NumberFormatException e) {
