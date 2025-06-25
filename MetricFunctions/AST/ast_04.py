@@ -1,0 +1,114 @@
+import javalang
+import os
+import math
+import csv
+from collections import Counter
+
+DIR_CODE = "../../Code/Java/Rare"
+DATA_CODE = "../../Data/Rare"
+
+# Refactored
+# DIR_CODE = "../../Code/Java/Refactored"
+# DATA_CODE = "../../Data/Refactored"
+
+def analizar_metodo(metodo):
+    operators, operands, mccabe = [], [], 1
+
+    for path, node in metodo:
+        if isinstance(node, javalang.tree.BinaryOperation):
+            operators.append(node.operator)
+            operands.append(str(node.operandl))
+            operands.append(str(node.operandr))
+        elif isinstance(node, javalang.tree.Assignment):
+            operators.append(node.type)
+            operands.append(str(node.expressionl))
+            operands.append(str(node.value))
+        elif isinstance(node, javalang.tree.MethodInvocation):
+            operators.append(node.member)
+            operands.extend(map(str, node.arguments))
+        elif isinstance(node, javalang.tree.Literal):
+            operands.append(node.value)
+        elif isinstance(node, javalang.tree.MemberReference):
+            operands.append(node.member)
+        elif isinstance(node, javalang.tree.VariableDeclarator):
+            operands.append(node.name)
+
+        if isinstance(node, (javalang.tree.IfStatement, javalang.tree.ForStatement,
+                             javalang.tree.WhileStatement, javalang.tree.DoStatement,
+                             javalang.tree.SwitchStatement, javalang.tree.AssertStatement)):
+            mccabe += 1
+
+    n1, n2 = len(set(operators)), len(set(operands))
+    N1, N2 = len(operators), len(operands)
+    n, N = n1 + n2, N1 + N2
+    V = N * math.log2(n) if n > 0 else 0
+    D = (n1 / 2) * (N2 / n2) if n2 > 0 else 0
+    E = D * V
+
+    return {
+        "n1": n1, "n2": n2, "N1": N1, "N2": N2,
+        "n": n, "N": N,
+        "V": round(V, 2), "D": round(D, 2), "E": round(E, 2),
+        "McCabe": mccabe
+    }
+
+def analizar_archivo(path_archivo):
+    with open(path_archivo, 'r', encoding='utf-8') as f:
+        codigo = f.read()
+
+    try:
+        tree = javalang.parse.parse(codigo)
+    except:
+        return None
+
+    archivo = os.path.basename(path_archivo)
+    acumulado = Counter()
+
+    for _, node in tree.filter(javalang.tree.MethodDeclaration):
+        sub_tree = list(node)
+        metrica = analizar_metodo(sub_tree)
+        acumulado.update({k: metrica[k] for k in ['n1', 'n2', 'N1', 'N2', 'n', 'N', 'McCabe']})
+
+    n, N = acumulado['n'], acumulado['N']
+    V = N * math.log2(n) if n > 0 else 0
+    D = (acumulado['n1'] / 2) * (acumulado['N2'] / acumulado['n2']) if acumulado['n2'] > 0 else 0
+    E = D * V
+
+    resumen = {
+        "archivo": archivo,
+        **acumulado,
+        "V": round(V, 2),
+        "D": round(D, 2),
+        "E": round(E, 2)
+    }
+
+    return resumen
+
+def analizar_directorio(carpeta):
+    resumen_archivo = []
+
+    for archivo in os.listdir(carpeta):
+        if archivo.endswith(".java"):
+            path = os.path.join(carpeta, archivo)
+            resumen = analizar_archivo(path)
+            if resumen:
+                resumen_archivo.append(resumen)
+
+    return resumen_archivo
+
+def guardar_csv(nombre, datos, campos):
+    with open(nombre, 'w', newline='', encoding='utf-8') as f:
+        writer = csv.DictWriter(f, fieldnames=campos)
+        writer.writeheader()
+        for fila in datos:
+            writer.writerow(fila)
+
+# === CONFIGURACIÓN ===
+carpeta_java = DIR_CODE
+
+resumen_archivo = analizar_directorio(carpeta_java)
+
+guardar_csv(f"{DATA_CODE}/halstead_mccabe_agregado_por_archivo.csv", resumen_archivo,
+            ['archivo', 'n1', 'n2', 'N1', 'N2', 'n', 'N', 'V', 'D', 'E', 'McCabe'])
+
+print("✅ Métricas agregadas por archivo exportadas a halstead_mccabe_agregado_por_archivo.csv")
