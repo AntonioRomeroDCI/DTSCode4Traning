@@ -6,12 +6,21 @@ from collections import Counter, defaultdict
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# FOLDER = "Rare"
-FOLDER = "Refactored"
+# # FOLDER = "Rare"
+# FOLDER = "Refactored"
 
-DIR_CODE = f"./Code/Java/{FOLDER}"
-DIR_GRAPHS = f"./Graficas/{FOLDER}"
-DATA_CODE = f"./Data/{FOLDER}"
+# #ChatGPT Codes
+# DIR_CODE = f"./Code/Java/{FOLDER}"
+# DIR_GRAPHS = f"./Graficas/{FOLDER}"
+# DATA_CODE = f"./Data/{FOLDER}"
+
+#FROM GITHUB
+FOLDER = "After"
+
+#GitHub Codes
+DIR_CODE = f"./FromGithub/{FOLDER}"
+DATA_CODE = f"./Data/GitHub/{FOLDER}"
+REFACTOR = 1 if FOLDER == "Before" else 0
 
 JAVA_OPERATORS = [
     "+", "-", "*", "/", "=", "==", "!=", ">", "<", ">=", "<=", "&&", "||", "!", "%",
@@ -89,6 +98,7 @@ def analyze_folder(folder_path, csv_metodo, csv_archivo):
                 mccabe = mccabe_complexity(body)
                 metrics = halstead
                 metrics['CC'] = mccabe
+                metrics['refactor'] = REFACTOR
 
                 row = {'Archivo': filename, 'Método': name}
                 row.update(metrics)
@@ -99,7 +109,7 @@ def analyze_folder(folder_path, csv_metodo, csv_archivo):
                         archivo_totales[filename][k] += v
 
     # Guardar CSV por método
-    method_keys = ['Archivo', 'Método', 'η1', 'η2', 'N1', 'N2', 'η', 'N', 'V', 'D', 'E', 'T', 'B', 'CC']
+    method_keys = ['Archivo', 'Método', 'η1', 'η2', 'N1', 'N2', 'η', 'N', 'V', 'D', 'E', 'T', 'B', 'CC','refactor']
     with open(csv_metodo, 'w', newline='', encoding='utf-8') as f:
         writer = csv.DictWriter(f, fieldnames=method_keys)
         writer.writeheader()
@@ -110,9 +120,10 @@ def analyze_folder(folder_path, csv_metodo, csv_archivo):
     for archivo, metricas in archivo_totales.items():
         row = {'Archivo': archivo}
         row.update(metricas)
+        row['refactor'] = REFACTOR
         summary.append(row)
 
-    archivo_keys = ['Archivo', 'η1', 'η2', 'N1', 'N2', 'η', 'N', 'V', 'D', 'E', 'T', 'B', 'CC']
+    archivo_keys = ['Archivo', 'η1', 'η2', 'N1', 'N2', 'η', 'N', 'V', 'D', 'E', 'T', 'B', 'CC','refactor']
     with open(csv_archivo, 'w', newline='', encoding='utf-8') as f:
         writer = csv.DictWriter(f, fieldnames=archivo_keys)
         writer.writeheader()
@@ -153,7 +164,7 @@ if __name__ == "__main__":
         csv_archivo=f"{DATA_CODE}/halstead_mccabe_por_archivo.csv"
     )
 
-    # Graficar automáticamente
-    graficar_metricas(f"{DATA_CODE}/halstead_mccabe_por_archivo.csv", DIR_GRAPHS, nivel="archivo")
-    graficar_metricas(f"{DATA_CODE}/halstead_mccabe_por_metodo.csv", DIR_GRAPHS, nivel="metodo")
+    # # Graficar automáticamente
+    # graficar_metricas(f"{DATA_CODE}/halstead_mccabe_por_archivo.csv", DIR_GRAPHS, nivel="archivo")
+    # graficar_metricas(f"{DATA_CODE}/halstead_mccabe_por_metodo.csv", DIR_GRAPHS, nivel="metodo")
 
