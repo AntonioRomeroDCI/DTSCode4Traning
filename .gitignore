@@ -1,2 +1,4 @@
 *.jar
 *.class
+FromGitHub/After/.*.java
+FromGitHub/Before/.*.java
