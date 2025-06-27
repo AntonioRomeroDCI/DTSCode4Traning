@@ -1,4 +1,4 @@
 *.jar
 *.class
-FromGitHub/After/.*.java
-FromGitHub/Before/.*.java
+FromGitHub/After/
+FromGitHub/Beforegit/
