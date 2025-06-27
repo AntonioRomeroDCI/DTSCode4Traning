@@ -10,4 +10,7 @@ https://github.com/tsantalis/RefactoringMiner
 
 ## Repositories:
 
+This repositories were used for research purposes to analyze its code
+
+spring-framework
 https://github.com/spring-projects/spring-framework/tree/main
