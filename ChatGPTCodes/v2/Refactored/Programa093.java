@@ -1,15 +1,20 @@
+package ChatGPTCodes.v2.Refactored;
+
 public class Programa093 {
     public static void main(String[] args) {
-        int a = 93;
-        int b = 95;
-        System.out.println("Resultado: " + multiplicar(a, b));
+        String palabra = "ejemplo93";
+        System.out.println("Vocales: " + contarVocales(palabra));
     }
 
-    public static int multiplicar(int x, int y) {
-        int resultado = 0;
-        for (int i = 0; i < y; i++) {
-            resultado += x;
+    public static int contarVocales(String texto) {
+        int contador = 0;
+        texto = texto.toLowerCase();
+        for (int i = 0; i < texto.length(); i++) {
+            char c = texto.charAt(i);
+            if ("aeiou".indexOf(c) != -1) {
+                contador++;
+            }
         }
-        return resultado;
+        return contador;
     }
 }

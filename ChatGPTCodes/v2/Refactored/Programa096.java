@@ -1,18 +1,16 @@
+package ChatGPTCodes.v2.Refactored;
+
 public class Programa096 {
     public static void main(String[] args) {
-        String palabra = "ejemplo96";
-        System.out.println("Vocales: " + contarVocales(palabra));
+        int n = 16;
+        System.out.println("Suma de pares hasta " + n + ": " + sumarPares(n));
     }
 
-    public static int contarVocales(String texto) {
-        int contador = 0;
-        texto = texto.toLowerCase();
-        for (int i = 0; i < texto.length(); i++) {
-            char c = texto.charAt(i);
-            if ("aeiou".indexOf(c) != -1) {
-                contador++;
-            }
+    public static int sumarPares(int n) {
+        int suma = 0;
+        for (int i = 2; i <= n; i += 2) {
+            suma += i;
         }
-        return contador;
+        return suma;
     }
 }

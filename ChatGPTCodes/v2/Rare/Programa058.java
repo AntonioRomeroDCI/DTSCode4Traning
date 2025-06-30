@@ -1,13 +1,15 @@
+package ChatGPTCodes.v2.Rare;
+
 public class Programa058 {
     public static void main(String[] args) {
-        System.out.print("Ingresa un número: ");
-        int n = 18;
-        int suma = 0;
-        for (int i = 1; i <= n; i++) {
-            if (i % 2 == 0) {
-                suma += i;
-            }
+        System.out.print("Ingresa el primer número: ");
+        int a = 58;
+        System.out.print("Ingresa el segundo número: ");
+        int b = 60;
+        int resultado = 0;
+        for (int i = 0; i < b; i++) {
+            resultado += a;
         }
-        System.out.println("Suma de pares hasta " + n + ": " + suma);
+        System.out.println("Resultado: " + resultado);
     }
 }

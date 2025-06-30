@@ -1,3 +1,5 @@
+package ChatGPTCodes.v2.Refactored;
+
 public class Programa062 {
     public static void main(String[] args) {
         int a = 62;

@@ -1,15 +1,16 @@
+package ChatGPTCodes.v2.Refactored;
+
 public class Programa031 {
     public static void main(String[] args) {
-        int a = 31;
-        int b = 33;
-        System.out.println("Resultado: " + multiplicar(a, b));
+        int n = 41;
+        System.out.println("¿Es primo? " + esPrimo(n));
     }
 
-    public static int multiplicar(int x, int y) {
-        int resultado = 0;
-        for (int i = 0; i < y; i++) {
-            resultado += x;
+    public static boolean esPrimo(int n) {
+        if (n <= 1) return false;
+        for (int i = 2; i < n; i++) {
+            if (n % i == 0) return false;
         }
-        return resultado;
+        return true;
     }
 }

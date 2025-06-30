@@ -1,15 +1,15 @@
+package ChatGPTCodes.v2.Rare;
+
 public class Programa034 {
     public static void main(String[] args) {
-        System.out.print("Ingresa una palabra: ");
-        String palabra = "ejemplo34";
-        palabra = palabra.toLowerCase();
-        int contador = 0;
-        for (int i = 0; i < palabra.length(); i++) {
-            char c = palabra.charAt(i);
-            if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
-                contador++;
-            }
+        System.out.print("Ingresa el primer número: ");
+        int a = 34;
+        System.out.print("Ingresa el segundo número: ");
+        int b = 36;
+        int resultado = 0;
+        for (int i = 0; i < b; i++) {
+            resultado += a;
         }
-        System.out.println("Vocales: " + contador);
+        System.out.println("Resultado: " + resultado);
     }
 }

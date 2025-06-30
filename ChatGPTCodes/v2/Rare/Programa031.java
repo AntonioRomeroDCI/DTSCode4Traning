@@ -1,13 +1,20 @@
+package ChatGPTCodes.v2.Rare;
+
 public class Programa031 {
     public static void main(String[] args) {
-        System.out.print("Ingresa el primer número: ");
-        int a = 31;
-        System.out.print("Ingresa el segundo número: ");
-        int b = 33;
-        int resultado = 0;
-        for (int i = 0; i < b; i++) {
-            resultado += a;
+        System.out.print("Ingresa un número: ");
+        int n = 41;
+        boolean esPrimo = true;
+        if (n <= 1) {
+            esPrimo = false;
+        } else {
+            for (int i = 2; i < n; i++) {
+                if (n % i == 0) {
+                    esPrimo = false;
+                    break;
+                }
+            }
         }
-        System.out.println("Resultado: " + resultado);
+        System.out.println("¿Es primo? " + esPrimo);
     }
 }

@@ -1,3 +1,5 @@
+package ChatGPTCodes.v2.Refactored;
+
 public class Programa027 {
     public static void main(String[] args) {
         int n = 37;

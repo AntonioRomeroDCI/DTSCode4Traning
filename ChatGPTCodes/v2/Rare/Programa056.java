@@ -1,18 +1,15 @@
+package ChatGPTCodes.v2.Rare;
+
 public class Programa056 {
     public static void main(String[] args) {
         System.out.print("Ingresa un número: ");
-        int n = 66;
-        boolean esPrimo = true;
-        if (n <= 1) {
-            esPrimo = false;
-        } else {
-            for (int i = 2; i < n; i++) {
-                if (n % i == 0) {
-                    esPrimo = false;
-                    break;
-                }
+        int n = 16;
+        int suma = 0;
+        for (int i = 1; i <= n; i++) {
+            if (i % 2 == 0) {
+                suma += i;
             }
         }
-        System.out.println("¿Es primo? " + esPrimo);
+        System.out.println("Suma de pares hasta " + n + ": " + suma);
     }
 }

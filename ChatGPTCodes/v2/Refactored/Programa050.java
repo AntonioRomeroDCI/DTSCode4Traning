@@ -1,18 +1,17 @@
+package ChatGPTCodes.v2.Refactored;
+
 public class Programa050 {
     public static void main(String[] args) {
-        String palabra = "ejemplo50";
-        System.out.println("Vocales: " + contarVocales(palabra));
+        int a = 50;
+        int b = 52;
+        System.out.println("Resultado: " + multiplicar(a, b));
     }
 
-    public static int contarVocales(String texto) {
-        int contador = 0;
-        texto = texto.toLowerCase();
-        for (int i = 0; i < texto.length(); i++) {
-            char c = texto.charAt(i);
-            if ("aeiou".indexOf(c) != -1) {
-                contador++;
-            }
+    public static int multiplicar(int x, int y) {
+        int resultado = 0;
+        for (int i = 0; i < y; i++) {
+            resultado += x;
         }
-        return contador;
+        return resultado;
     }
 }

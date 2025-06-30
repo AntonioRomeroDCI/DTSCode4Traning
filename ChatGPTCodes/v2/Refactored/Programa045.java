@@ -1,3 +1,5 @@
+package ChatGPTCodes.v2.Refactored;
+
 public class Programa045 {
     public static void main(String[] args) {
         String palabra = "ejemplo45";

@@ -1,14 +1,20 @@
+package ChatGPTCodes.v2.Refactored;
+
 public class Programa021 {
     public static void main(String[] args) {
-        int n = 31;
-        System.out.println("¿Es primo? " + esPrimo(n));
+        String palabra = "ejemplo21";
+        System.out.println("Vocales: " + contarVocales(palabra));
     }
 
-    public static boolean esPrimo(int n) {
-        if (n <= 1) return false;
-        for (int i = 2; i < n; i++) {
-            if (n % i == 0) return false;
+    public static int contarVocales(String texto) {
+        int contador = 0;
+        texto = texto.toLowerCase();
+        for (int i = 0; i < texto.length(); i++) {
+            char c = texto.charAt(i);
+            if ("aeiou".indexOf(c) != -1) {
+                contador++;
+            }
         }
-        return true;
+        return contador;
     }
 }

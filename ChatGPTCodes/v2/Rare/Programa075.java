@@ -1,3 +1,5 @@
+package ChatGPTCodes.v2.Rare;
+
 public class Programa075 {
     public static void main(String[] args) {
         System.out.print("Ingresa un número: ");

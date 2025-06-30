@@ -1,15 +1,16 @@
+package ChatGPTCodes.v2.Refactored;
+
 public class Programa068 {
     public static void main(String[] args) {
-        int a = 68;
-        int b = 70;
-        System.out.println("Resultado: " + multiplicar(a, b));
+        int n = 18;
+        System.out.println("Suma de pares hasta " + n + ": " + sumarPares(n));
     }
 
-    public static int multiplicar(int x, int y) {
-        int resultado = 0;
-        for (int i = 0; i < y; i++) {
-            resultado += x;
+    public static int sumarPares(int n) {
+        int suma = 0;
+        for (int i = 2; i <= n; i += 2) {
+            suma += i;
         }
-        return resultado;
+        return suma;
     }
 }

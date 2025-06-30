@@ -1,14 +1,16 @@
+package ChatGPTCodes.v2.Refactored;
+
 public class Programa024 {
     public static void main(String[] args) {
-        int n = 34;
-        System.out.println("¿Es primo? " + esPrimo(n));
+        int n = 14;
+        System.out.println("Suma de pares hasta " + n + ": " + sumarPares(n));
     }
 
-    public static boolean esPrimo(int n) {
-        if (n <= 1) return false;
-        for (int i = 2; i < n; i++) {
-            if (n % i == 0) return false;
+    public static int sumarPares(int n) {
+        int suma = 0;
+        for (int i = 2; i <= n; i += 2) {
+            suma += i;
         }
-        return true;
+        return suma;
     }
 }
