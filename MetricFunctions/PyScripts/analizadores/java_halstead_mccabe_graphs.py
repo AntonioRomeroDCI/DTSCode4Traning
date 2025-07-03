@@ -6,21 +6,21 @@ from collections import Counter, defaultdict
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# # FOLDER = "Rare"
-# FOLDER = "Refactored"
+# #FROM GITHUB
+# FOLDER = "After"
 
-# #ChatGPT Codes
-# DIR_CODE = f"./Code/Java/{FOLDER}"
-# DIR_GRAPHS = f"./Graficas/{FOLDER}"
-# DATA_CODE = f"./Data/{FOLDER}"
+# #GitHub Codes
+# DIR_CODE = f"./FromGithub/{FOLDER}"
+# DATA_CODE = f"./Data/GitHub/{FOLDER}"
+# REFACTOR = 1 if FOLDER == "Before" else 0
 
-#FROM GITHUB
-FOLDER = "After"
+#FROM ChatGPT
+FOLDER = "Refactored"
 
 #GitHub Codes
-DIR_CODE = f"./FromGithub/{FOLDER}"
-DATA_CODE = f"./Data/GitHub/{FOLDER}"
-REFACTOR = 1 if FOLDER == "Before" else 0
+DIR_CODE = f"./ChatGPTCodes/v2/{FOLDER}"
+DATA_CODE = f"./Data/ChatGPT/v2/{FOLDER}"
+REFACTOR = 1 if FOLDER == "Rare" else 0
 
 JAVA_OPERATORS = [
     "+", "-", "*", "/", "=", "==", "!=", ">", "<", ">=", "<=", "&&", "||", "!", "%",
