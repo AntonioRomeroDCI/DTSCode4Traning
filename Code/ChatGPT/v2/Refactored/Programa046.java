@@ -1,4 +1,4 @@
-package ChatGPTCodes.v2.Refactored;
+package Code.ChatGPT.v2.Refactored;
 
 public class Programa046 {
     public static void main(String[] args) {

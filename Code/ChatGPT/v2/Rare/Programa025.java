@@ -1,4 +1,4 @@
-package ChatGPTCodes.v2.Rare;
+package Code.ChatGPT.v2.Rare;
 
 public class Programa025 {
     public static void main(String[] args) {

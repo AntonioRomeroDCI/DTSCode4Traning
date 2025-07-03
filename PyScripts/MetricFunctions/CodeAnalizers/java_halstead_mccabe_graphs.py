@@ -18,8 +18,8 @@ import pandas as pd
 FOLDER = "Refactored"
 
 #GitHub Codes
-DIR_CODE = f"./ChatGPTCodes/v2/{FOLDER}"
-DATA_CODE = f"./Data/ChatGPT/v2/{FOLDER}"
+DIR_CODE = f"./Code/ChatGPT/v2/{FOLDER}"
+DATA_CODE = f"./Data/Metrics/ChatGPT/v2/{FOLDER}"
 REFACTOR = 1 if FOLDER == "Rare" else 0
 
 JAVA_OPERATORS = [
